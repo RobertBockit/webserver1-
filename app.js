@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.post("/api/login", function (req,res) {
-
+    let hasAuthUser = false
     let username = req.body.username;
     let password = req.body.password;
 
@@ -17,17 +17,18 @@ app.post("/api/login", function (req,res) {
         const userToCheck = users[i];
         console.log("Checking User Number " + i)
         if (userToCheck.username === username && userToCheck.password === password) {
-
-            res.sendStatus(200);
+            hasAuthUser = true
+            res.send("200");
             console.log("User '" + username + "' is logged in")
             break;
         }
-        res.sendStatus(401)
 
 
 
 
     }
+    if (hasAuthUser === false) {res.send("401")}
+
 })
 
 
