@@ -7,6 +7,10 @@ console.log(users);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + '/public/landing-page.html')
+})
+
 
 app.post("/api/login", function (req,res) {
     let hasAuthUser = false
@@ -18,7 +22,9 @@ app.post("/api/login", function (req,res) {
         console.log("Checking User Number " + i)
         if (userToCheck.username === username && userToCheck.password === password) {
             hasAuthUser = true
-            res.send("200");
+            const token = username + String(Date.now())
+            console.log("Token for user is: " + token)
+            res.send(token);
             console.log("User '" + username + "' is logged in")
             break;
         }
@@ -27,7 +33,7 @@ app.post("/api/login", function (req,res) {
 
 
     }
-    if (hasAuthUser === false) {res.send("401")}
+    if (hasAuthUser === false) {res.sendStatus(401)}
 
 })
 
