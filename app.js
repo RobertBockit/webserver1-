@@ -11,6 +11,10 @@ app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/landing-page.html')
 })
 
+app.get('/', function (req, res) {
+    res.redirect('/home', 301);
+});
+
 
 app.post("/api/login", function (req,res) {
     let hasAuthUser = false
