@@ -3,17 +3,51 @@ const app = express()
 const port = 3000
 const { users } = require('./database');
 const database = {users : users};
+
+
 console.log(users);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
+
+
+function checkIfUserExists(username){
+    let userExists = false
+    for( let i = 0; i < database.users.length; i++){
+        const userToCheck = users[i];
+        if(username === userToCheck.username){
+            userExists = true
+            return true
+        }
+    }
+
+    if(userExists === false){
+        return false
+    }
+}
+
+
+
 
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/landing-page.html')
 })
 
 app.get('/', function (req, res) {
-    res.redirect('/home', 301);
+    res.redirect('/home');
 });
+
+
+
+app.get('/api/:username/city', (req, res) => {
+    let username = req.params.username
+    if(checkIfUserExists(username)){
+        const userRecord = database.users.find(user => user.username === username);
+        res.send(userRecord.city)
+    } else {
+        res.sendStatus(404)
+    }
+})
+
 
 
 app.post("/api/login", function (req,res) {
