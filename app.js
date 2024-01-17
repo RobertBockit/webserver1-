@@ -5,7 +5,7 @@ const { users } = require('./database');
 const database = {users : users};
 
 
-console.log(users);
+    console.log(users);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
@@ -53,7 +53,7 @@ app.post("/api/login", function (req,res) {
     let hasAuthUser = false
     let username = req.body.username;
     let password = req.body.password;
-
+    console.log(req.body)
 
     //
     for (let i = 0; i < database.users.length; i++) {
