@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Login Page </title>
     <link rel="stylesheet" href="style.css">
-
+    <script src="/login-page-scripts/password-toggle.js" defer> </script>
 </head>
 <body>
 <div class="container"> <h1>Login Form</h1> </div>
@@ -16,10 +16,16 @@
         <label>Username : </label>
         <input type="text" placeholder="Enter Username" name="username" required>
         <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+       <div style="display:flex">  <input id ="passwordField" type="password" placeholder="Enter Password" name="password" required>
+        <button type="button" style="width:30%; font-size: 1rem" onclick="toggleVisibility()" id="showPassword"> Show Password</button></div>
         <input class='button' type="submit" value="Login">
     </div>
 </form>
 
+
 </body>
 </html>
+
+<script>
+
+</script>

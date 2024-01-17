@@ -9,7 +9,6 @@ console.log(users);
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
-
 function checkIfUserExists(username){
     let userExists = false
     for( let i = 0; i < database.users.length; i++){
@@ -55,6 +54,8 @@ app.post("/api/login", function (req,res) {
     let username = req.body.username;
     let password = req.body.password;
 
+
+    //
     for (let i = 0; i < database.users.length; i++) {
         const userToCheck = users[i];
         console.log("Checking User Number " + i)
