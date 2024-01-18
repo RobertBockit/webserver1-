@@ -9,6 +9,10 @@ const database = {users : users};
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
+app.use(express.static(__dirname + '/public', {
+    extensions: ['html']
+}));
+
 function checkIfUserExists(username){
     let userExists = false
     for( let i = 0; i < database.users.length; i++){
@@ -47,12 +51,30 @@ app.get('/api/:username/city', (req, res) => {
     }
 })
 
+app.get('/api/:username/profile-picture-path', (req, res) => {
+    let username = req.params.username
+    if(checkIfUserExists(username)){
+        const userRecord = database.users.find(user => user.username === username);
+        res.send(userRecord.profilePicturePath)
+    } else {
+        res.sendStatus(404)
+    }
+})
+
+
 
 
 app.post("/api/login", function (req,res) {
+    console.log("/api/login received req.body:")
+    console.log(req)
     let hasAuthUser = false
     let username = req.body.username;
     let password = req.body.password;
+    console.log("user received credentials:")
+    console.log(username + password)
+    if(username==="hans" && password==="hanspassword"){
+        res.sendStatus(200);
+    }
     console.log(req.body)
 
     //
@@ -63,6 +85,7 @@ app.post("/api/login", function (req,res) {
             hasAuthUser = true
             const token = username + String(Date.now())
             console.log("Token for user is: " + token)
+            res.sendStatus(200)
             res.send(token);
             console.log("User '" + username + "' is logged in")
             break;

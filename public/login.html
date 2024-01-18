@@ -5,20 +5,22 @@
     <title> Login Page </title>
     <link rel="stylesheet" href="style.css">
     <script src="/login-page-scripts/password-toggle.js" defer> </script>
+    <script src="/login-page-scripts/authentication.js" defer> </script>
+
 </head>
 <body>
 <div class="container"> <h1>Login Form</h1> </div>
 <div class="container" style="margin-top: -6rem; font-size:1.5rem"> <p>Please Login to my Website to access its contents</p></div>
 
 
-<form class="container" method="post" action="api/login">
+<form class="container" id="login-form">
     <div>
         <label>Username : </label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <input type="text" placeholder="Enter Username" name="username" id="usernameField" required>
         <label>Password : </label>
        <div style="display:flex">  <input id ="passwordField" type="password" placeholder="Enter Password" name="password" required>
         <button type="button" style="width:30%; font-size: 1rem" onclick="toggleVisibility()" id="showPassword"> Show Password</button></div>
-        <input class='button' type="submit" value="Login">
+        <input class='button' type="submit" value="Login" onclick="authenticateUser(event)">
     </div>
 </form>
 
