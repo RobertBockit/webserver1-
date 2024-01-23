@@ -3,15 +3,16 @@ const app = express()
 const port = 3000
 const { users } = require('./database');
 const database = {users : users};
+const cookieParser = require('cookie-parser')
+const path = require("path")
 
 
-    console.log(users);
+
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser())
 
-app.use(express.static(__dirname + '/public', {
-    extensions: ['html']
-}));
+
 
 function checkIfUserExists(username){
     let userExists = false
@@ -29,6 +30,19 @@ function checkIfUserExists(username){
 }
 
 
+app.get("/dashboard", function(req, res){
+    console.log(1)
+    if(req.cookies.sessionToken) {
+        const userCookie = req.cookies.sessionToken;
+        console.log("cookie exists")
+        res.sendFile(__dirname + "/public/dashboard.html")
+    } else {
+        console.log("no cookie  exists")
+
+        res.redirect("/login.html")
+    }
+
+})
 
 
 app.get('/home', (req, res) => {
@@ -41,15 +55,7 @@ app.get('/', function (req, res) {
 
 
 
-app.get('/api/:username/city', (req, res) => {
-    let username = req.params.username
-    if(checkIfUserExists(username)){
-        const userRecord = database.users.find(user => user.username === username);
-        res.send(userRecord.city)
-    } else {
-        res.sendStatus(404)
-    }
-})
+
 
 app.get('/api/:username/profile-picture-path', (req, res) => {
     let username = req.params.username
@@ -72,22 +78,20 @@ app.post("/api/login", function (req,res) {
     let password = req.body.password;
     console.log("user received credentials:")
     console.log(username + password)
-    if(username==="hans" && password==="hanspassword"){
-        res.sendStatus(200);
-    }
     console.log(req.body)
 
-    //
     for (let i = 0; i < database.users.length; i++) {
         const userToCheck = users[i];
         console.log("Checking User Number " + i)
         if (userToCheck.username === username && userToCheck.password === password) {
             hasAuthUser = true
             const token = username + String(Date.now())
+
             console.log("Token for user is: " + token)
-            res.sendStatus(200)
-            res.send(token);
+            res.cookie("sessionToken", token)
+
             console.log("User '" + username + "' is logged in")
+            res.sendStatus(200)
             break;
         }
 

@@ -16,10 +16,17 @@ async function authenticateUser(event){
 
         },
     )
-    console.log(response)
+    console.log(await response.text)
 
     if(response.status === 200){
         console.log("loggedin")
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            window.location.href = 'http://localhost:3000/dashboard.html';
+
+        };
+        xhttp.open("POST", "demo_post.asp", true);
+        xhttp.send();
     }
 }
 
