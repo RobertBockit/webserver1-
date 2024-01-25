@@ -41,14 +41,43 @@ async function getTemperature() {
         }
 
         const resultOfWeather = await weather();// Use await here
-        return resultOfWeather.main.temp
+        return [resultOfWeather.main.temp, resultOfWeather.weather[0].main]
 
 }
+
+let weather;
 function updateText(){
     getTemperature().then(function (result) {
         const weatherBox = document.getElementById("weatherNotice")
-        weatherBox.textContent = "Currently, temperature in Berlin is " + result
+        weatherBox.textContent = "Currently, temperature in Berlin is " + result[0]
+        console.log(result)
+        weather = result[1]
+        console.log(weather)
+
+        let path;
+
+        switch (weather){
+            case "Thunderstorm" : path = "/weather-images/thundrestorm.png"; break
+            case "Rain" : path = "/weather-images/rain.png"; break
+            case "Clear" : path = "/weather-images/sunny.png"; break
+            case "Clouds" : path = "/weather-images/cloudy.png"; break
+            case "Snow" : path = "/weather-images/snowy.png"; break
+        }
+
+        console.log(path)
+
+        const elem = document.createElement("img");
+        elem.src = path
+        document.getElementById(" weather-image").appendChild(elem);
+
+
+
     })
 
 
+
+
+
 }
+
+

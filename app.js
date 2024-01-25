@@ -72,7 +72,6 @@ app.get('/api/:username/profile-picture-path', (req, res) => {
 
 app.post("/api/login", function (req,res) {
     console.log("/api/login received req.body:")
-    console.log(req)
     let hasAuthUser = false
     let username = req.body.username;
     let password = req.body.password;
