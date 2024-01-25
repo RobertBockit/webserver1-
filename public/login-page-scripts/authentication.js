@@ -22,7 +22,7 @@ async function authenticateUser(event){
         console.log("loggedin")
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            window.location.href = 'http://localhost:3000/dashboard.html';
+            window.location.href = '/dashboard.html';
 
         };
         xhttp.open("POST", "demo_post.asp", true);
