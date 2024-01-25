@@ -28,5 +28,12 @@ async function authenticateUser(event){
         xhttp.open("POST", "demo_post.asp", true);
         xhttp.send();
     }
+
+    if(response.status === 401){
+        console.log("CREATIgn POPUP")
+        let popup = document.getElementById("401err")
+        popup.style.display = "flex"
+
+    }
 }
 

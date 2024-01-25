@@ -11,3 +11,10 @@ function toggleVisibility(){
 
     }
 }
+
+function closePopUp() {
+    let popup = document.getElementById("401err")
+    popup.style.display = "none";
+}
+
+
