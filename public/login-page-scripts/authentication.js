@@ -20,6 +20,8 @@ async function authenticateUser(event){
 
     if(response.status === 200){
         console.log("loggedin")
+        sessionStorage.setItem("username", usernameInput);
+
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             window.location.href = '/dashboard.html';
