@@ -8,14 +8,14 @@ const users = [{
         username: "anna",
         password : "annapassword",
         city: "riga",
-        profilePicturePath: "/profile-pictures/profile1.png"
+        profilePicturePath: "/profile-pictures/profile2.jpeg"
 
     },
     {
         username: "nikita",
         password : "nikitapassword",
         city: "moscow",
-        profilePicturePath: "/profile-pictures/profile1.png"
+        profilePicturePath: "/profile-pictures/profile3.jpg"
 
     }]
 

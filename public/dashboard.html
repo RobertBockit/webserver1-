@@ -8,12 +8,12 @@
     <script src="/dashboard-page-script/updateUserData.js" defer> </script>
     <script src="/button-scripts/logout.js" defer> </script>
 </head>
-<body onload="updateUserData()">
+<body onload="updateUserData(); updateUserProfilePicture()">
 <div class="container bg-light">
     <div class="row">
         <div class="col-lg-9 align-items-left"><h1 class="mt-5" id="h1_dashboard"></h1>
         </div>
-        <div class="col-lg-1 align-items-right">  <img style='width:64px' class='mt-5' src="https://cdn.iconscout.com/icon/free/png-256/free-profile-1481935-1254808.png">
+        <div class="col-lg-1 align-items-right">  <img style='width:64px' id="profile-pic" class='mt-5' src="https://cdn.iconscout.com/icon/free/png-256/free-profile-1481935-1254808.png">
         </div>
         <div class="col-lg-2 mt-5">
         <button class="btn btn-lg btn-secondary" onclick="logoutUser(event)" id = 'logout-button'> Log Out</button>

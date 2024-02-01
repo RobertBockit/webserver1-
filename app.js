@@ -71,7 +71,7 @@ app.get('/api/:username/profile-picture-path', (req, res) => {
     let username = req.params.username
     if(checkIfUserExists(username)){
         const userRecord = database.users.find(user => user.username === username);
-        res.send(userRecord.profilePicturePath)
+        res.send(JSON.stringify(userRecord.profilePicturePath))
     } else {
         res.sendStatus(404)
     }
