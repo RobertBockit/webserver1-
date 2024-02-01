@@ -2,11 +2,18 @@ const apiKey = "af420b9f11addf4695a637749b746fac"
 
 
 
+let username = sessionStorage.getItem("username")
+let userCity;
+
 async function updateCurrentWeatherData() {
 
 
+    let city = await fetch("/api/" + username + "/city"
+    ).then(result => result.json()).then(res => res)
 
-    const city = "Berlin"
+    userCity = city
+
+
     const url = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey
     console.log(url)
     const coordinates = async () => {
@@ -49,7 +56,7 @@ let weather;
 function updateText(){
     getTemperature().then(function (result) {
         const weatherBox = document.getElementById("weatherNotice")
-        weatherBox.textContent = "Currently, temperature in Berlin is " + result[0]
+        weatherBox.textContent = "Currently, temperature in " + userCity + " is " + result[0]
         console.log(result)
         weather = result[1]
         console.log(weather)

@@ -29,6 +29,16 @@ function checkIfUserExists(username){
     }
 }
 
+app.get('/api/:username/city', (req, res) => {
+    let username = req.params.username
+    if(checkIfUserExists(username)){
+        const userRecord = database.users.find(user => user.username === username);
+        res.send(JSON.stringify(userRecord.city))
+    } else {
+        res.sendStatus(404)
+    }
+})
+
 
 app.get("/dashboard", function(req, res){
     console.log(1)
@@ -70,6 +80,10 @@ app.get('/api/:username/profile-picture-path', (req, res) => {
 
 
 
+
+
+
+
 app.post("/api/login", function (req,res) {
     console.log("/api/login received req.body:")
     let hasAuthUser = false
@@ -78,6 +92,7 @@ app.post("/api/login", function (req,res) {
     console.log("user received credentials:")
     console.log(username + password)
     console.log(req.body)
+
 
     for (let i = 0; i < database.users.length; i++) {
         const userToCheck = users[i];
@@ -101,7 +116,6 @@ app.post("/api/login", function (req,res) {
     if (hasAuthUser === false) {res.sendStatus(401)}
 
 })
-
 
 app.listen(port, function () {
     console.log(`Example app listening on port ${port}`)
