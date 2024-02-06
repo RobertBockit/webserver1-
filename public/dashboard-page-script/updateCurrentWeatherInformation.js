@@ -1,4 +1,4 @@
-const apiKey = "af420b9f11addf4695a637749b746fac"
+let apiKey = "af420b9f11addf4695a637749b746fac"
 
 
 
@@ -77,14 +77,5 @@ function updateText(){
         elem.src = path
         document.getElementById(" weather-image").appendChild(elem);
 
-
-
     })
-
-
-
-
-
 }
-
-
