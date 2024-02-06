@@ -20,7 +20,7 @@ async function updateCurrentWeatherData1(city) {
 
 }
 
- async function getTemperature(lat,lon) {
+ async function getTemperature1(lat,lon) {
 
      let url = "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+lat+"&lon="+lon+"&appid=" + apiKey
 
@@ -49,7 +49,7 @@ async function showSearchedWeather(event) {
     }
     let userSearchCity = document.getElementById("search-text").value
     await updateCurrentWeatherData1(userSearchCity).then(r => searchQuery = r )
-    await getTemperature(searchQuery[0], searchQuery[1]).then(r => updateSearchText(searchQuery[2], r))
+    await getTemperature1(searchQuery[0], searchQuery[1]).then(r => updateSearchText(searchQuery[2], r))
 
 }
 
