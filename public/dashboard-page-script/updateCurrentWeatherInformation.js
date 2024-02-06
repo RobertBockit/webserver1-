@@ -8,13 +8,11 @@ let userCity;
 async function updateCurrentWeatherData() {
 
 
-    let city = await fetch("/api/" + username + "/city"
+    userCity = await fetch("/api/" + username + "/city"
     ).then(result => result.json()).then(res => res)
 
-    userCity = city
 
-
-    const url = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey
+    const url = "https://api.openweathermap.org/geo/1.0/direct?q=" + userCity + "&limit=1&appid=" + apiKey
     console.log(url)
     const coordinates = async () => {
         const response = await fetch(url)
@@ -22,15 +20,25 @@ async function updateCurrentWeatherData() {
         return response.json()
     }
     const result = await coordinates();// Use await here
+    console.log("coor results")
+    console.log(result)
+
     const lat = result[0].lat
     const lon = result[0].lon
+
+    console.log(lat)
+    console.log(lon)
+
 
     return [lat, lon]
 
 }
 
 async function getTemperature() {
+        console.log("waiting for coordinates")
         const result = await updateCurrentWeatherData();
+        console.log(result)
+    console.log("setting up coordinates")
 
         const lat = result[0];
         const lon = result[1];

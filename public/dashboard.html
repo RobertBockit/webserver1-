@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/dashboard-style.css">
     <script src="/dashboard-page-script/updateCurrentWeatherInformation.js" defer> </script>
     <script src="/dashboard-page-script/updateUserData.js" defer> </script>
     <script src="/button-scripts/logout.js" defer> </script>
     <script src="/dashboard-page-script/weather-search.js" defer> </script>
+    <script src="/dashboard-page-script/updateWeatherForecast.js" defer></script>
 </head>
 <body onload="updateUserData(); updateUserProfilePicture()">
 <div class="container bg-light">
@@ -32,9 +34,12 @@
         </button>
     <p id="search-results"></p><br>
 
-    <button onclick="updateText()">Get Current Weather</button>
+    <button onclick="updateText();updateWeatherForecast()">Get Current Weather</button>
     <p id="weatherNotice"> </p>
     <div class="weather-img" style='width: 300px; height:200px; overflow:hidden;' id = ' weather-image'> </div>
+
+
+    <div id="forecast" class="forecast"> </div>
 </div>
 
 

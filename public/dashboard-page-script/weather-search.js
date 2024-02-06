@@ -1,7 +1,7 @@
  apiKey = "af420b9f11addf4695a637749b746fac"
  username = sessionStorage.getItem("username")
 
-async function updateCurrentWeatherData(city) {
+async function updateCurrentWeatherData1(city) {
 
     let url = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey
     console.log(url)
@@ -42,24 +42,14 @@ async function updateCurrentWeatherData(city) {
 let searchQuery
 async function showSearchedWeather(event) {
     event.preventDefault()
-
-
     function updateSearchText(city, r) {
         let searchText = document.getElementById("search-results")
         searchText.textContent = "Weather in " + city.charAt(0).toUpperCase() + city.slice(1).toLowerCase() + " (" + r[3] + ")  is " + r[1] + " | " + r[0] + " degrees Celsius"
 
     }
-
-
     let userSearchCity = document.getElementById("search-text").value
-    await updateCurrentWeatherData(userSearchCity).then(r => searchQuery = r )
-
-
-    await getTemperature(searchQuery[0], searchQuery[1]).then(r => console.log(r))
-
+    await updateCurrentWeatherData1(userSearchCity).then(r => searchQuery = r )
     await getTemperature(searchQuery[0], searchQuery[1]).then(r => updateSearchText(searchQuery[2], r))
-
-
 
 }
 
